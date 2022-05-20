@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Mon Aug  2 15:44:09 2021
+# Process ID: 7436
+# Current directory: C:/Tesis/Versiones/TesisV3/SERDES_EM/SERDES_EM.runs/impl_1
+# Command line: vivado.exe -log mainInstantiation.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source mainInstantiation.tcl -notrace
+# Log file: C:/Tesis/Versiones/TesisV3/SERDES_EM/SERDES_EM.runs/impl_1/mainInstantiation.vdi
+# Journal file: C:/Tesis/Versiones/TesisV3/SERDES_EM/SERDES_EM.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source mainInstantiation.tcl -notrace

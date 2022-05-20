@@ -1,0 +1,168 @@
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
+| Date         : Mon Aug  2 15:46:13 2021
+| Host         : DESKTOP-AU45JBF running 64-bit major release  (build 9200)
+| Command      : report_drc -file mainInstantiation_drc_routed.rpt -pb mainInstantiation_drc_routed.pb -rpx mainInstantiation_drc_routed.rpx
+| Design       : mainInstantiation
+| Device       : xc7a200tsbg484-1
+| Speed File   : -1
+| Design State : Fully Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 26
++-----------+----------+----------------------------------------------------+------------+
+| Rule      | Severity | Description                                        | Violations |
++-----------+----------+----------------------------------------------------+------------+
+| PDRC-153  | Warning  | Gated clock check                                  | 22         |
+| REQP-101  | Warning  | enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND | 2          |
+| REQP-1580 | Warning  | Phase alignment                                    | 2          |
++-----------+----------+----------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+PDRC-153#1 Warning
+Gated clock check  
+Net FiniteStateMachine_BitAllign/FallEdgeCounter_reg[0]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin FiniteStateMachine_BitAllign/FallEdgeCounter_reg[0]_LDC_i_1/O, cell FiniteStateMachine_BitAllign/FallEdgeCounter_reg[0]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#2 Warning
+Gated clock check  
+Net FiniteStateMachine_BitAllign/FallEdgeCounter_reg[1]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin FiniteStateMachine_BitAllign/FallEdgeCounter_reg[1]_LDC_i_1/O, cell FiniteStateMachine_BitAllign/FallEdgeCounter_reg[1]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#3 Warning
+Gated clock check  
+Net FiniteStateMachine_BitAllign/FallEdgeCounter_reg[2]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin FiniteStateMachine_BitAllign/FallEdgeCounter_reg[2]_LDC_i_1/O, cell FiniteStateMachine_BitAllign/FallEdgeCounter_reg[2]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#4 Warning
+Gated clock check  
+Net FiniteStateMachine_BitAllign/MControl_reg[0]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin FiniteStateMachine_BitAllign/MControl_reg[0]_LDC_i_1/O, cell FiniteStateMachine_BitAllign/MControl_reg[0]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#5 Warning
+Gated clock check  
+Net FiniteStateMachine_BitAllign/MControl_reg[1]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin FiniteStateMachine_BitAllign/MControl_reg[1]_LDC_i_1/O, cell FiniteStateMachine_BitAllign/MControl_reg[1]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#6 Warning
+Gated clock check  
+Net FiniteStateMachine_BitAllign/PhaseCounter_reg[0]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin FiniteStateMachine_BitAllign/PhaseCounter_reg[0]_LDC_i_1/O, cell FiniteStateMachine_BitAllign/PhaseCounter_reg[0]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#7 Warning
+Gated clock check  
+Net FiniteStateMachine_BitAllign/PhaseCounter_reg[1]_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin FiniteStateMachine_BitAllign/PhaseCounter_reg[1]_LDC_i_1/O, cell FiniteStateMachine_BitAllign/PhaseCounter_reg[1]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#8 Warning
+Gated clock check  
+Net FiniteStateMachine_BitAllign/PhaseReady_reg_LDC_i_1_n_0 is a gated clock net sourced by a combinational pin FiniteStateMachine_BitAllign/PhaseReady_reg_LDC_i_1/O, cell FiniteStateMachine_BitAllign/PhaseReady_reg_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#9 Warning
+Gated clock check  
+Net SERDES_inst/State_reg is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[13]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[13]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#10 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_0 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[12]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[12]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#11 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_1 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[11]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[11]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#12 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_10 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[2]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[2]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#13 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_11 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[1]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[1]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#14 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_12 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[0]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[0]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#15 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_2 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[10]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[10]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#16 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_3 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[9]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[9]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#17 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_4 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[8]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[8]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#18 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_5 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[7]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[7]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#19 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_6 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[6]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[6]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#20 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_7 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[5]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[5]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#21 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_8 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[4]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[4]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+PDRC-153#22 Warning
+Gated clock check  
+Net SERDES_inst/State_reg_9 is a gated clock net sourced by a combinational pin SERDES_inst/Aux_Register_reg[3]_LDC_i_1/O, cell SERDES_inst/Aux_Register_reg[3]_LDC_i_1. This is not good design practice and will likely impact performance. For SLICE registers, for example, use the CE pin to control the loading of data.
+Related violations: <none>
+
+REQP-101#1 Warning
+enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
+SERDES_inst/ISERDESE2_Master_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
+Related violations: <none>
+
+REQP-101#2 Warning
+enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
+SERDES_inst/ISERDESE2_Slave_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
+Related violations: <none>
+
+REQP-1580#1 Warning
+Phase alignment  
+Unsupported clocking topology used for ISERDESE2 SERDES_inst/ISERDESE2_Master_inst. This can result in corrupted data. The SERDES_inst/ISERDESE2_Master_inst/CLK / SERDES_inst/ISERDESE2_Master_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Related violations: <none>
+
+REQP-1580#2 Warning
+Phase alignment  
+Unsupported clocking topology used for ISERDESE2 SERDES_inst/ISERDESE2_Slave_inst. This can result in corrupted data. The SERDES_inst/ISERDESE2_Slave_inst/CLK / SERDES_inst/ISERDESE2_Slave_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Related violations: <none>
+
+

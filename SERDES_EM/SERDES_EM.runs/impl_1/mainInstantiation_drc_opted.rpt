@@ -1,0 +1,57 @@
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.2 (win64) Build 3064766 Wed Nov 18 09:12:45 MST 2020
+| Date         : Mon Aug  2 15:44:50 2021
+| Host         : DESKTOP-AU45JBF running 64-bit major release  (build 9200)
+| Command      : report_drc -file mainInstantiation_drc_opted.rpt -pb mainInstantiation_drc_opted.pb -rpx mainInstantiation_drc_opted.rpx
+| Design       : mainInstantiation
+| Device       : xc7a200tsbg484-1
+| Speed File   : -1
+| Design State : Synthesized
+------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 4
++-----------+----------+----------------------------------------------------+------------+
+| Rule      | Severity | Description                                        | Violations |
++-----------+----------+----------------------------------------------------+------------+
+| REQP-101  | Warning  | enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND | 2          |
+| REQP-1580 | Warning  | Phase alignment                                    | 2          |
++-----------+----------+----------------------------------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+REQP-101#1 Warning
+enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
+SERDES_inst/ISERDESE2_Master_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
+Related violations: <none>
+
+REQP-101#2 Warning
+enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
+SERDES_inst/ISERDESE2_Slave_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
+Related violations: <none>
+
+REQP-1580#1 Warning
+Phase alignment  
+Unsupported clocking topology used for ISERDESE2 SERDES_inst/ISERDESE2_Master_inst. This can result in corrupted data. The SERDES_inst/ISERDESE2_Master_inst/CLK / SERDES_inst/ISERDESE2_Master_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Related violations: <none>
+
+REQP-1580#2 Warning
+Phase alignment  
+Unsupported clocking topology used for ISERDESE2 SERDES_inst/ISERDESE2_Slave_inst. This can result in corrupted data. The SERDES_inst/ISERDESE2_Slave_inst/CLK / SERDES_inst/ISERDESE2_Slave_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Related violations: <none>
+
+

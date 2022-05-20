@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7a200tsbg484-1" LaunchTime="1627937040">
+  <File Type="BITSTR-BMM" Name="mainInstantiation_bd.bmm"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="mainInstantiation_methodology_drc_opted.rpt"/>
+  <File Type="INIT-TIMING" Name="mainInstantiation_timing_summary_init.rpt"/>
+  <File Type="ROUTE-PWR" Name="mainInstantiation_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="mainInstantiation.tcl"/>
+  <File Type="OPT-TIMING" Name="mainInstantiation_timing_summary_opted.rpt"/>
+  <File Type="OPT-DCP" Name="mainInstantiation_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="mainInstantiation_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="mainInstantiation_reports.tcl"/>
+  <File Type="OPT-DRC" Name="mainInstantiation_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="mainInstantiation.hwdef"/>
+  <File Type="PWROPT-DCP" Name="mainInstantiation_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="mainInstantiation_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="mainInstantiation_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="mainInstantiation_placed.dcp"/>
+  <File Type="PLACE-IO" Name="mainInstantiation_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="mainInstantiation_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="mainInstantiation_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="mainInstantiation_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="mainInstantiation_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="mainInstantiation_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="mainInstantiation_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-TIMING" Name="mainInstantiation_timing_summary_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="mainInstantiation_postplace_pwropt.dcp"/>
+  <File Type="BG-BIN" Name="mainInstantiation.bin"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="mainInstantiation_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="mainInstantiation_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="mainInstantiation_drc_physopted.rpt"/>
+  <File Type="BITSTR-MSK" Name="mainInstantiation.msk"/>
+  <File Type="PHYSOPT-TIMING" Name="mainInstantiation_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="mainInstantiation_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="mainInstantiation_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="mainInstantiation_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="mainInstantiation_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="mainInstantiation_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="mainInstantiation_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="mainInstantiation.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="mainInstantiation_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="mainInstantiation_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="mainInstantiation_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="mainInstantiation_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="mainInstantiation_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="mainInstantiation_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="mainInstantiation_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="mainInstantiation_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="mainInstantiation_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="mainInstantiation_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="mainInstantiation_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="mainInstantiation_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="mainInstantiation_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="mainInstantiation_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="mainInstantiation_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="mainInstantiation_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="mainInstantiation_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="mainInstantiation_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="mainInstantiation_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="mainInstantiation_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="mainInstantiation_bus_skew_postroute_physopted.pb"/>
+  <File Type="BG-BIT" Name="mainInstantiation.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="mainInstantiation_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BITSTR-RBT" Name="mainInstantiation.rbt"/>
+  <File Type="BITSTR-NKY" Name="mainInstantiation.nky"/>
+  <File Type="PDI-FILE" Name="mainInstantiation.pdi"/>
+  <File Type="RCFI_FILE" Name="mainInstantiation.rcfi"/>
+  <File Type="CFI_FILE" Name="mainInstantiation.cfi"/>
+  <File Type="RNPI_FILE" Name="mainInstantiation.rnpi"/>
+  <File Type="NPI_FILE" Name="mainInstantiation.npi"/>
+  <File Type="RBD_FILE" Name="mainInstantiation.rbd"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="mainInstantiation.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="mainInstantiation.sysdef"/>
+  <File Type="BG-BGN" Name="mainInstantiation.bgn"/>
+  <File Type="BG-DRC" Name="mainInstantiation.drc"/>
+  <File Type="RDI-RDI" Name="mainInstantiation.vdi"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/Buff.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/CLK_RETRIEVER.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/FSM_Bit.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/FSM_Frame.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/MUX2.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/MUX4.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/PLL.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/S2P.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/diffBuff.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/mainInst.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="mainInstantiation"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PSRCDIR/constrs_1/new/Contraints.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020"/>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+</GenRun>
