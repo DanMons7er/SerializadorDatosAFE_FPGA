@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu Jul 22 09:48:10 2021
+# Process ID: 6456
+# Current directory: C:/Tesis/Versiones/TesisV3/Prueba/Prueba.runs/impl_1
+# Command line: vivado.exe -log Led.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source Led.tcl -notrace
+# Log file: C:/Tesis/Versiones/TesisV3/Prueba/Prueba.runs/impl_1/Led.vdi
+# Journal file: C:/Tesis/Versiones/TesisV3/Prueba/Prueba.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source Led.tcl -notrace
