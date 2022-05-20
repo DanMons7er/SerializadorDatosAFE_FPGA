@@ -1,0 +1,91 @@
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.2 (lin64) Build 3064766 Wed Nov 18 09:12:47 MST 2020
+| Date         : Thu May  5 21:33:57 2022
+| Host         : daniel-VirtualBox running 64-bit Ubuntu 18.04.4 LTS
+| Command      : report_control_sets -verbose -file top_control_sets.rpt
+| Design       : top
+| Device       : xc7a200t
+------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    13 |
+|    Minimum number of control sets                        |    13 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    47 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    13 |
+| >= 0 to < 4        |     1 |
+| >= 4 to < 6        |     5 |
+| >= 6 to < 8        |     1 |
+| >= 8 to < 10       |     1 |
+| >= 10 to < 12      |     3 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |     2 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              15 |           12 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |             106 |           43 |
+| Yes          | No                    | No                     |               0 |            0 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |              64 |           23 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++-------------------+-----------------------------------------+----------------------+------------------+----------------+--------------+
+|    Clock Signal   |              Enable Signal              |   Set/Reset Signal   | Slice Load Count | Bel Load Count | Bels / Slice |
++-------------------+-----------------------------------------+----------------------+------------------+----------------+--------------+
+|  sys_clk          | serial_tx_fsm1_next_value_ce0           | user_btn0_IBUF       |                1 |              1 |         1.00 |
+| ~bufrFrameClk_clk | fsmForFrameDefault_bitslipEnable        | user_btn0_IBUF       |                1 |              4 |         4.00 |
+| ~bufrFrameClk_clk | fsmForFrame_bitslipEnable               | user_btn0_IBUF       |                1 |              4 |         4.00 |
+| ~muxClk_clk       |                                         | user_btn0_IBUF       |                1 |              4 |         4.00 |
+| ~invSysClk_O      |                                         |                      |                3 |              4 |         1.33 |
+| ~invSysClk_O      | FIFO_DUALCLOCK_MACRO_280/E[0]           | user_btn0_IBUF       |                1 |              4 |         4.00 |
+|  sys_clk          |                                         | txCounter[6]_i_1_n_0 |                2 |              7 |         3.50 |
+|  sys_clk          | auxSysTxData[7]_i_1_n_0                 | user_btn0_IBUF       |                6 |              8 |         1.33 |
+|  sys_clk          |                                         |                      |                9 |             11 |         1.22 |
+| ~invSysClk_O      |                                         | user_btn0_IBUF       |                6 |             11 |         1.83 |
+| ~invSysClk_O      | FIFO_DUALCLOCK_MACRO/E[0]               | user_btn0_IBUF       |                5 |             11 |         2.20 |
+| ~bufrFrameClk_clk | FIFO_DUALCLOCK_MACRO_240/user_led7_OBUF | user_btn0_IBUF       |                8 |             32 |         4.00 |
+|  sys_clk          |                                         | user_btn0_IBUF       |               34 |             84 |         2.47 |
++-------------------+-----------------------------------------+----------------------+------------------+----------------+--------------+
+
+

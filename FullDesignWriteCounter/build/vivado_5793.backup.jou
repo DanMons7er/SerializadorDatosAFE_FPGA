@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:47 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Thu May  5 21:16:42 2022
+# Process ID: 5793
+# Current directory: /home/daniel/Escritorio/FullDesignWriteCounter/build
+# Command line: vivado -mode batch -source top.tcl
+# Log file: /home/daniel/Escritorio/FullDesignWriteCounter/build/vivado.log
+# Journal file: /home/daniel/Escritorio/FullDesignWriteCounter/build/vivado.jou
+#-----------------------------------------------------------
+source top.tcl
