@@ -1,0 +1,588 @@
+Library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+library UNISIM;
+use UNISIM.VComponents.all;
+
+entity FIFO36 is
+    port( DI: in std_logic_vector (15 downto 0);
+          DIP: in std_logic_vector (1 downto 0);
+          DO: out std_logic_vector (15 downto 0);
+          DOP: out std_logic_vector (1 downto 0);
+          WRClk: in std_logic_vector; -- Must be Frame Clock
+          RDClk: in std_logic_vector;
+          EMPTY: out std_logic;
+          ALMOSTEMPTY: out std_logic;
+          FULL: out std_logic;
+          ALMOSTFULL: out std_logic;
+          WREN: in std_logic;
+          RDEN: in std_logic;
+          IntClk: in std_logic;
+          Reset: in std_logic;
+          W_Count: out std_logic_vector (12 downto 0);
+          W_Error: out std_logic;
+          R_Count: out std_logic_vector (12 downto 0);
+          R_Error: out std_logic
+        ); 
+end Mux;
+
+architecture Behavioral of FIFO36 is
+-- FIFO Inner Input/Outputs
+signal DIO_F1: std_logic_vector (15 downto 0); 
+signal DIOP_F1: std_logic_vector (1 downto 0);
+signal DIO_F2: std_logic_vector (15 downto 0); 
+signal DIOP_F2: std_logic_vector (1 downto 0);
+signal DIO_F3: std_logic_vector (15 downto 0); 
+signal DIOP_F3: std_logic_vector (1 downto 0);
+signal DIO_F4: std_logic_vector (15 downto 0); 
+signal DIOP_F4: std_logic_vector (1 downto 0);
+signal DIO_F5: std_logic_vector (15 downto 0); 
+signal DIOP_F5: std_logic_vector (1 downto 0);
+signal DIO_F6: std_logic_vector (15 downto 0); 
+signal DIOP_F6: std_logic_vector (1 downto 0);
+signal DIO_F7: std_logic_vector (15 downto 0); 
+signal DIOP_F7: std_logic_vector (1 downto 0);
+signal DIO_F8: std_logic_vector (15 downto 0); 
+signal DIOP_F8: std_logic_vector (1 downto 0);
+signal DIO_F9: std_logic_vector (15 downto 0); 
+signal DIOP_F9: std_logic_vector (1 downto 0);
+-- FIFO Status signals
+signal EMPTY_A: std_logic;
+signal EMPTY_B: std_logic;
+signal FULL_B; std_logic;
+signal EMPTY_C: std_logic;
+signal FULL_C; std_logic;
+signal EMPTY_D: std_logic;
+signal FULL_D; std_logic;
+signal EMPTY_E: std_logic;
+signal FULL_E; std_logic;
+signal EMPTY_F: std_logic;
+signal FULL_F; std_logic;
+signal EMPTY_G: std_logic;
+signal FULL_G; std_logic;
+signal EMPTY_H: std_logic;
+signal FULL_H; std_logic;
+signal EMPTY_I: std_logic;
+signal FULL_I; std_logic;
+signal FULL_J; std_logic;
+-- FIFO Inner Write Enable signals
+signal WREN_B: std_logic;
+signal WREN_C: std_logic;
+signal WREN_D: std_logic;
+signal WREN_E: std_logic;
+signal WREN_F: std_logic;
+signal WREN_G: std_logic;
+signal WREN_H: std_logic;
+signal WREN_I: std_logic;
+signal WREN_J: std_logic;
+
+begin
+    -- Control Logic Gates
+    WREN_B <= EMPTY_A NOR FULL_B;
+    WREN_C <= EMPTY_B NOR FULL_C;
+    WREN_D <= EMPTY_C NOR FULL_D;
+    WREN_E <= EMPTY_D NOR FULL_E;
+    WREN_F <= EMPTY_E NOR FULL_F;
+    WREN_G <= EMPTY_F NOR FULL_G;
+    WREN_H <= EMPTY_G NOR FULL_H;
+    WREN_I <= EMPTY_H NOR FULL_I;
+    WREN_J <= EMPTY_I NOR FULL_J;
+
+    -- FIFO Instantiations
+    FIFO36E1_instA : FIFO36E1
+    generic map (
+            ALMOST_EMPTY_OFFSET => X"00A0", -- Sets the almost empty threshold
+            ALMOST_FULL_OFFSET => X"00A0", -- Sets almost full threshold
+            DATA_WIDTH => 18, -- Sets data width to 4-72
+            DO_REG => 1, -- Enable output register (1-0) Must be 1 if EN_SYN = FALSE
+            EN_ECC_READ => FALSE, -- Enable ECC decoder, FALSE, TRUE
+            EN_ECC_WRITE => FALSE, -- Enable ECC encoder, FALSE, TRUE
+            EN_SYN => FALSE, -- Specifies FIFO as Asynchronous (FALSE) or Synchronous (TRUE)
+            FIFO_MODE => "FIFO36", -- Sets mode to "FIFO36" or "FIFO36_72"
+            FIRST_WORD_FALL_THROUGH => TRUE, -- Sets the FIFO FWFT to &VALUES
+            INIT => X"000000000000000000", -- Initial values on output port
+            SIM_DEVICE => "7SERIES", -- Must be set to "7SERIES" for simulation behavior
+            SRVAL => X"000000000000000000" -- Set/Reset value for output port
+    )
+    port map (
+            -- ECC Signals: 1-bit (each) output: Error Correction Circuitry ports
+            DBITERR => 'open', -- 1-bit output: Double bit error status
+            ECCPARITY => 'open', -- 8-bit output: Generated error correction parity
+            SBITERR => 'open', -- 1-bit output: Single bit error status
+            -- Read Data: 18-bit (each) output: Read output data
+            DO => DIO_F1, -- 16-bit output: Data output
+            DOP => DIOP_F1, -- 2-bit output: Parity data output
+            -- Status: 1-bit (each) output: Flags and other FIFO status outputs
+            ALMOSTEMPTY => 'open', -- 1-bit output: Almost empty flag
+            ALMOSTFULL => ALMOSTFULL, -- 1-bit output: Almost full flag
+            EMPTY => EMPTY_A, -- 1-bit output: Empty flag
+            FULL => FULL, -- 1-bit output: Full flag
+            RDCOUNT => 'open', -- 13-bit output: Read count
+            RDERR => 'open', -- 1-bit output: Read error
+            WRCOUNT => W_Count, -- 13-bit output: Write count
+            WRERR => W_Error, -- 1-bit output: Write error
+            -- ECC Signals: 1-bit (each) input: Error Correction Circuitry ports
+            INJECTDBITERR => 'open', -- 1-bit input: Inject a double bit error input
+            INJECTSBITERR => 'open',
+            -- Read Control Signals: 1-bit (each) input: Read clock, enable and reset input signals
+            RDCLK => IntClk, -- 1-bit input: Read clock
+            RDEN => WREN_B, -- 1-bit input: Read enable
+            REGCE => '1', -- 1-bit input: Clock enable
+            RST => Reset, -- 1-bit input: Reset
+            RSTREG => '0', -- 1-bit input: Output register set/reset
+            -- Write Control Signals: 1-bit (each) input: Write clock and enable input signals
+            WRCLK => WRClk, -- 1-bit input: Rising edge write clock.
+            WREN => WREN, -- 1-bit input: Write enable
+            -- Write Data: 18-bit (each) input: Write input data
+            DI => DI, -- 16-bit input: Data input
+            DIP => DIP -- 2-bit input: Parity input
+    );
+
+    FIFO36E1_instB : FIFO36E1
+    generic map (
+            ALMOST_EMPTY_OFFSET => X"00A0", -- Sets the almost empty threshold
+            ALMOST_FULL_OFFSET => X"00A0", -- Sets almost full threshold
+            DATA_WIDTH => 18, -- Sets data width to 4-72
+            DO_REG => 1, -- Enable output register (1-0) Must be 1 if EN_SYN = FALSE
+            EN_ECC_READ => FALSE, -- Enable ECC decoder, FALSE, TRUE
+            EN_ECC_WRITE => FALSE, -- Enable ECC encoder, FALSE, TRUE
+            EN_SYN => FALSE, -- Specifies FIFO as Asynchronous (FALSE) or Synchronous (TRUE)
+            FIFO_MODE => "FIFO36", -- Sets mode to "FIFO36" or "FIFO36_72"
+            FIRST_WORD_FALL_THROUGH => TRUE, -- Sets the FIFO FWFT to &VALUES
+            INIT => X"000000000000000000", -- Initial values on output port
+            SIM_DEVICE => "7SERIES", -- Must be set to "7SERIES" for simulation behavior
+            SRVAL => X"000000000000000000" -- Set/Reset value for output port
+    )
+    port map (
+            -- ECC Signals: 1-bit (each) output: Error Correction Circuitry ports
+            DBITERR => 'open', -- 1-bit output: Double bit error status
+            ECCPARITY => 'open', -- 8-bit output: Generated error correction parity
+            SBITERR => 'open', -- 1-bit output: Single bit error status
+            -- Read Data: 18-bit (each) output: Read output data
+            DO => DIO_F2, -- 16-bit output: Data output
+            DOP => DIOP_F2, -- 2-bit output: Parity data output
+            -- Status: 1-bit (each) output: Flags and other FIFO status outputs
+            ALMOSTEMPTY => 'open', -- 1-bit output: Almost empty flag
+            ALMOSTFULL => 'open', -- 1-bit output: Almost full flag
+            EMPTY => EMPTY_B, -- 1-bit output: Empty flag
+            FULL => FULL_B, -- 1-bit output: Full flag
+            RDCOUNT => 'open', -- 13-bit output: Read count
+            RDERR => 'open', -- 1-bit output: Read error
+            WRCOUNT => 'open', -- 13-bit output: Write count
+            WRERR => 'open', -- 1-bit output: Write error
+            -- ECC Signals: 1-bit (each) input: Error Correction Circuitry ports
+            INJECTDBITERR => 'open', -- 1-bit input: Inject a double bit error input
+            INJECTSBITERR => 'open',
+            -- Read Control Signals: 1-bit (each) input: Read clock, enable and reset input signals
+            RDCLK => IntClk, -- 1-bit input: Read clock
+            RDEN => WREN_C, -- 1-bit input: Read enable
+            REGCE => '1', -- 1-bit input: Clock enable
+            RST => Reset, -- 1-bit input: Reset
+            RSTREG => '0', -- 1-bit input: Output register set/reset
+            -- Write Control Signals: 1-bit (each) input: Write clock and enable input signals
+            WRCLK => IntClk, -- 1-bit input: Rising edge write clock.
+            WREN => WREN_B, -- 1-bit input: Write enable
+            -- Write Data: 18-bit (each) input: Write input data
+            DI => DIO_F1, -- 16-bit input: Data input
+            DIP => DIOP_F1 -- 2-bit input: Parity input
+    );
+
+    FIFO36E1_instC : FIFO36E1
+    generic map (
+            ALMOST_EMPTY_OFFSET => X"00A0", -- Sets the almost empty threshold
+            ALMOST_FULL_OFFSET => X"00A0", -- Sets almost full threshold
+            DATA_WIDTH => 18, -- Sets data width to 4-72
+            DO_REG => 1, -- Enable output register (1-0) Must be 1 if EN_SYN = FALSE
+            EN_ECC_READ => FALSE, -- Enable ECC decoder, FALSE, TRUE
+            EN_ECC_WRITE => FALSE, -- Enable ECC encoder, FALSE, TRUE
+            EN_SYN => FALSE, -- Specifies FIFO as Asynchronous (FALSE) or Synchronous (TRUE)
+            FIFO_MODE => "FIFO36", -- Sets mode to "FIFO36" or "FIFO36_72"
+            FIRST_WORD_FALL_THROUGH => TRUE, -- Sets the FIFO FWFT to &VALUES
+            INIT => X"000000000000000000", -- Initial values on output port
+            SIM_DEVICE => "7SERIES", -- Must be set to "7SERIES" for simulation behavior
+            SRVAL => X"000000000000000000" -- Set/Reset value for output port
+    )
+    port map (
+            -- ECC Signals: 1-bit (each) output: Error Correction Circuitry ports
+            DBITERR => 'open', -- 1-bit output: Double bit error status
+            ECCPARITY => 'open', -- 8-bit output: Generated error correction parity
+            SBITERR => 'open', -- 1-bit output: Single bit error status
+            -- Read Data: 18-bit (each) output: Read output data
+            DO => DIO_F3, -- 16-bit output: Data output
+            DOP => DIOP_F3, -- 2-bit output: Parity data output
+            -- Status: 1-bit (each) output: Flags and other FIFO status outputs
+            ALMOSTEMPTY => 'open', -- 1-bit output: Almost empty flag
+            ALMOSTFULL => 'open', -- 1-bit output: Almost full flag
+            EMPTY => EMPTY_C, -- 1-bit output: Empty flag
+            FULL => FULL_C, -- 1-bit output: Full flag
+            RDCOUNT => 'open', -- 13-bit output: Read count
+            RDERR => 'open', -- 1-bit output: Read error
+            WRCOUNT => 'open', -- 13-bit output: Write count
+            WRERR => 'open', -- 1-bit output: Write error
+            -- ECC Signals: 1-bit (each) input: Error Correction Circuitry ports
+            INJECTDBITERR => 'open', -- 1-bit input: Inject a double bit error input
+            INJECTSBITERR => 'open',
+            -- Read Control Signals: 1-bit (each) input: Read clock, enable and reset input signals
+            RDCLK => IntClk, -- 1-bit input: Read clock
+            RDEN => WREN_D, -- 1-bit input: Read enable
+            REGCE => '1', -- 1-bit input: Clock enable
+            RST => Reset, -- 1-bit input: Reset
+            RSTREG => '0', -- 1-bit input: Output register set/reset
+            -- Write Control Signals: 1-bit (each) input: Write clock and enable input signals
+            WRCLK => IntClk, -- 1-bit input: Rising edge write clock.
+            WREN => WREN_C, -- 1-bit input: Write enable
+            -- Write Data: 18-bit (each) input: Write input data
+            DI => DIO_F2, -- 16-bit input: Data input
+            DIP => DIOP_F2 -- 2-bit input: Parity input
+    );
+
+    FIFO36E1_instD : FIFO36E1
+    generic map (
+            ALMOST_EMPTY_OFFSET => X"00A0", -- Sets the almost empty threshold
+            ALMOST_FULL_OFFSET => X"00A0", -- Sets almost full threshold
+            DATA_WIDTH => 18, -- Sets data width to 4-72
+            DO_REG => 1, -- Enable output register (1-0) Must be 1 if EN_SYN = FALSE
+            EN_ECC_READ => FALSE, -- Enable ECC decoder, FALSE, TRUE
+            EN_ECC_WRITE => FALSE, -- Enable ECC encoder, FALSE, TRUE
+            EN_SYN => FALSE, -- Specifies FIFO as Asynchronous (FALSE) or Synchronous (TRUE)
+            FIFO_MODE => "FIFO36", -- Sets mode to "FIFO36" or "FIFO36_72"
+            FIRST_WORD_FALL_THROUGH => TRUE, -- Sets the FIFO FWFT to &VALUES
+            INIT => X"000000000000000000", -- Initial values on output port
+            SIM_DEVICE => "7SERIES", -- Must be set to "7SERIES" for simulation behavior
+            SRVAL => X"000000000000000000" -- Set/Reset value for output port
+    )
+    port map (
+            -- ECC Signals: 1-bit (each) output: Error Correction Circuitry ports
+            DBITERR => 'open', -- 1-bit output: Double bit error status
+            ECCPARITY => 'open', -- 8-bit output: Generated error correction parity
+            SBITERR => 'open', -- 1-bit output: Single bit error status
+            -- Read Data: 18-bit (each) output: Read output data
+            DO => DIO_F4, -- 16-bit output: Data output
+            DOP => DIOP_F4, -- 2-bit output: Parity data output
+            -- Status: 1-bit (each) output: Flags and other FIFO status outputs
+            ALMOSTEMPTY => 'open', -- 1-bit output: Almost empty flag
+            ALMOSTFULL => 'open', -- 1-bit output: Almost full flag
+            EMPTY => EMPTY_D, -- 1-bit output: Empty flag
+            FULL => FULL_D, -- 1-bit output: Full flag
+            RDCOUNT => 'open', -- 13-bit output: Read count
+            RDERR => 'open', -- 1-bit output: Read error
+            WRCOUNT => 'open', -- 13-bit output: Write count
+            WRERR => 'open', -- 1-bit output: Write error
+            -- ECC Signals: 1-bit (each) input: Error Correction Circuitry ports
+            INJECTDBITERR => 'open', -- 1-bit input: Inject a double bit error input
+            INJECTSBITERR => 'open',
+            -- Read Control Signals: 1-bit (each) input: Read clock, enable and reset input signals
+            RDCLK => IntClk, -- 1-bit input: Read clock
+            RDEN => WREN_E, -- 1-bit input: Read enable
+            REGCE => '1', -- 1-bit input: Clock enable
+            RST => Reset, -- 1-bit input: Reset
+            RSTREG => '0', -- 1-bit input: Output register set/reset
+            -- Write Control Signals: 1-bit (each) input: Write clock and enable input signals
+            WRCLK => IntClk, -- 1-bit input: Rising edge write clock.
+            WREN => WREN_D, -- 1-bit input: Write enable
+            -- Write Data: 18-bit (each) input: Write input data
+            DI => DIO_F3, -- 16-bit input: Data input
+            DIP => DIOP_F3 -- 2-bit input: Parity input
+    );
+
+    FIFO36E1_instE : FIFO36E1
+    generic map (
+            ALMOST_EMPTY_OFFSET => X"00A0", -- Sets the almost empty threshold
+            ALMOST_FULL_OFFSET => X"00A0", -- Sets almost full threshold
+            DATA_WIDTH => 18, -- Sets data width to 4-72
+            DO_REG => 1, -- Enable output register (1-0) Must be 1 if EN_SYN = FALSE
+            EN_ECC_READ => FALSE, -- Enable ECC decoder, FALSE, TRUE
+            EN_ECC_WRITE => FALSE, -- Enable ECC encoder, FALSE, TRUE
+            EN_SYN => FALSE, -- Specifies FIFO as Asynchronous (FALSE) or Synchronous (TRUE)
+            FIFO_MODE => "FIFO36", -- Sets mode to "FIFO36" or "FIFO36_72"
+            FIRST_WORD_FALL_THROUGH => TRUE, -- Sets the FIFO FWFT to &VALUES
+            INIT => X"000000000000000000", -- Initial values on output port
+            SIM_DEVICE => "7SERIES", -- Must be set to "7SERIES" for simulation behavior
+            SRVAL => X"000000000000000000" -- Set/Reset value for output port
+    )
+    port map (
+            -- ECC Signals: 1-bit (each) output: Error Correction Circuitry ports
+            DBITERR => 'open', -- 1-bit output: Double bit error status
+            ECCPARITY => 'open', -- 8-bit output: Generated error correction parity
+            SBITERR => 'open', -- 1-bit output: Single bit error status
+            -- Read Data: 18-bit (each) output: Read output data
+            DO => DIO_F5, -- 16-bit output: Data output
+            DOP => DIOP_F5, -- 2-bit output: Parity data output
+            -- Status: 1-bit (each) output: Flags and other FIFO status outputs
+            ALMOSTEMPTY => 'open', -- 1-bit output: Almost empty flag
+            ALMOSTFULL => 'open', -- 1-bit output: Almost full flag
+            EMPTY => EMPTY_E, -- 1-bit output: Empty flag
+            FULL => FULL_E, -- 1-bit output: Full flag
+            RDCOUNT => 'open', -- 13-bit output: Read count
+            RDERR => 'open', -- 1-bit output: Read error
+            WRCOUNT => 'open', -- 13-bit output: Write count
+            WRERR => 'open', -- 1-bit output: Write error
+            -- ECC Signals: 1-bit (each) input: Error Correction Circuitry ports
+            INJECTDBITERR => 'open', -- 1-bit input: Inject a double bit error input
+            INJECTSBITERR => 'open',
+            -- Read Control Signals: 1-bit (each) input: Read clock, enable and reset input signals
+            RDCLK => IntClk, -- 1-bit input: Read clock
+            RDEN => WRENF, -- 1-bit input: Read enable
+            REGCE => '1', -- 1-bit input: Clock enable
+            RST => Reset, -- 1-bit input: Reset
+            RSTREG => '0', -- 1-bit input: Output register set/reset
+            -- Write Control Signals: 1-bit (each) input: Write clock and enable input signals
+            WRCLK => IntClk, -- 1-bit input: Rising edge write clock.
+            WREN => WREN_E, -- 1-bit input: Write enable
+            -- Write Data: 18-bit (each) input: Write input data
+            DI => DIO_F4, -- 16-bit input: Data input
+            DIP => DIOP_F4 -- 2-bit input: Parity input
+    );
+
+    FIFO36E1_instF : FIFO36E1
+    generic map (
+            ALMOST_EMPTY_OFFSET => X"00A0", -- Sets the almost empty threshold
+            ALMOST_FULL_OFFSET => X"00A0", -- Sets almost full threshold
+            DATA_WIDTH => 18, -- Sets data width to 4-72
+            DO_REG => 1, -- Enable output register (1-0) Must be 1 if EN_SYN = FALSE
+            EN_ECC_READ => FALSE, -- Enable ECC decoder, FALSE, TRUE
+            EN_ECC_WRITE => FALSE, -- Enable ECC encoder, FALSE, TRUE
+            EN_SYN => FALSE, -- Specifies FIFO as Asynchronous (FALSE) or Synchronous (TRUE)
+            FIFO_MODE => "FIFO36", -- Sets mode to "FIFO36" or "FIFO36_72"
+            FIRST_WORD_FALL_THROUGH => TRUE, -- Sets the FIFO FWFT to &VALUES
+            INIT => X"000000000000000000", -- Initial values on output port
+            SIM_DEVICE => "7SERIES", -- Must be set to "7SERIES" for simulation behavior
+            SRVAL => X"000000000000000000" -- Set/Reset value for output port
+    )
+    port map (
+            -- ECC Signals: 1-bit (each) output: Error Correction Circuitry ports
+            DBITERR => 'open', -- 1-bit output: Double bit error status
+            ECCPARITY => 'open', -- 8-bit output: Generated error correction parity
+            SBITERR => 'open', -- 1-bit output: Single bit error status
+            -- Read Data: 18-bit (each) output: Read output data
+            DO => DIO_F6, -- 16-bit output: Data output
+            DOP => DIOP_F6, -- 2-bit output: Parity data output
+            -- Status: 1-bit (each) output: Flags and other FIFO status outputs
+            ALMOSTEMPTY => 'open', -- 1-bit output: Almost empty flag
+            ALMOSTFULL => 'open', -- 1-bit output: Almost full flag
+            EMPTY => EMPTY_F, -- 1-bit output: Empty flag
+            FULL => FULL_F, -- 1-bit output: Full flag
+            RDCOUNT => 'open', -- 13-bit output: Read count
+            RDERR => 'open', -- 1-bit output: Read error
+            WRCOUNT => 'open', -- 13-bit output: Write count
+            WRERR => 'open', -- 1-bit output: Write error
+            -- ECC Signals: 1-bit (each) input: Error Correction Circuitry ports
+            INJECTDBITERR => 'open', -- 1-bit input: Inject a double bit error input
+            INJECTSBITERR => 'open',
+            -- Read Control Signals: 1-bit (each) input: Read clock, enable and reset input signals
+            RDCLK => IntClk, -- 1-bit input: Read clock
+            RDEN => WREN_G, -- 1-bit input: Read enable
+            REGCE => '1', -- 1-bit input: Clock enable
+            RST => Reset, -- 1-bit input: Reset
+            RSTREG => '0', -- 1-bit input: Output register set/reset
+            -- Write Control Signals: 1-bit (each) input: Write clock and enable input signals
+            WRCLK => IntClk, -- 1-bit input: Rising edge write clock.
+            WREN => WREN_F, -- 1-bit input: Write enable
+            -- Write Data: 18-bit (each) input: Write input data
+            DI => DIO_F5, -- 16-bit input: Data input
+            DIP => DIOP_F5 -- 2-bit input: Parity input
+    );
+
+    FIFO36E1_instG : FIFO36E1
+    generic map (
+            ALMOST_EMPTY_OFFSET => X"00A0", -- Sets the almost empty threshold
+            ALMOST_FULL_OFFSET => X"00A0", -- Sets almost full threshold
+            DATA_WIDTH => 18, -- Sets data width to 4-72
+            DO_REG => 1, -- Enable output register (1-0) Must be 1 if EN_SYN = FALSE
+            EN_ECC_READ => FALSE, -- Enable ECC decoder, FALSE, TRUE
+            EN_ECC_WRITE => FALSE, -- Enable ECC encoder, FALSE, TRUE
+            EN_SYN => FALSE, -- Specifies FIFO as Asynchronous (FALSE) or Synchronous (TRUE)
+            FIFO_MODE => "FIFO36", -- Sets mode to "FIFO36" or "FIFO36_72"
+            FIRST_WORD_FALL_THROUGH => TRUE, -- Sets the FIFO FWFT to &VALUES
+            INIT => X"000000000000000000", -- Initial values on output port
+            SIM_DEVICE => "7SERIES", -- Must be set to "7SERIES" for simulation behavior
+            SRVAL => X"000000000000000000" -- Set/Reset value for output port
+    )
+    port map (
+            -- ECC Signals: 1-bit (each) output: Error Correction Circuitry ports
+            DBITERR => 'open', -- 1-bit output: Double bit error status
+            ECCPARITY => 'open', -- 8-bit output: Generated error correction parity
+            SBITERR => 'open', -- 1-bit output: Single bit error status
+            -- Read Data: 18-bit (each) output: Read output data
+            DO => DIO_F7, -- 16-bit output: Data output
+            DOP => DIOP_F7, -- 2-bit output: Parity data output
+            -- Status: 1-bit (each) output: Flags and other FIFO status outputs
+            ALMOSTEMPTY => 'open', -- 1-bit output: Almost empty flag
+            ALMOSTFULL => 'open', -- 1-bit output: Almost full flag
+            EMPTY => EMPTY_G, -- 1-bit output: Empty flag
+            FULL => FULL_G, -- 1-bit output: Full flag
+            RDCOUNT => 'open', -- 13-bit output: Read count
+            RDERR => 'open', -- 1-bit output: Read error
+            WRCOUNT => 'open', -- 13-bit output: Write count
+            WRERR => 'open', -- 1-bit output: Write error
+            -- ECC Signals: 1-bit (each) input: Error Correction Circuitry ports
+            INJECTDBITERR => 'open', -- 1-bit input: Inject a double bit error input
+            INJECTSBITERR => 'open',
+            -- Read Control Signals: 1-bit (each) input: Read clock, enable and reset input signals
+            RDCLK => IntClk, -- 1-bit input: Read clock
+            RDEN => WREN_H, -- 1-bit input: Read enable
+            REGCE => '1', -- 1-bit input: Clock enable
+            RST => Reset, -- 1-bit input: Reset
+            RSTREG => '0', -- 1-bit input: Output register set/reset
+            -- Write Control Signals: 1-bit (each) input: Write clock and enable input signals
+            WRCLK => IntClk, -- 1-bit input: Rising edge write clock.
+            WREN => WREN_G, -- 1-bit input: Write enable
+            -- Write Data: 18-bit (each) input: Write input data
+            DI => DIO_F6, -- 16-bit input: Data input
+            DIP => DIOP_F6 -- 2-bit input: Parity input
+    );
+
+    FIFO36E1_instH : FIFO36E1
+    generic map (
+            ALMOST_EMPTY_OFFSET => X"00A0", -- Sets the almost empty threshold
+            ALMOST_FULL_OFFSET => X"00A0", -- Sets almost full threshold
+            DATA_WIDTH => 18, -- Sets data width to 4-72
+            DO_REG => 1, -- Enable output register (1-0) Must be 1 if EN_SYN = FALSE
+            EN_ECC_READ => FALSE, -- Enable ECC decoder, FALSE, TRUE
+            EN_ECC_WRITE => FALSE, -- Enable ECC encoder, FALSE, TRUE
+            EN_SYN => FALSE, -- Specifies FIFO as Asynchronous (FALSE) or Synchronous (TRUE)
+            FIFO_MODE => "FIFO36", -- Sets mode to "FIFO36" or "FIFO36_72"
+            FIRST_WORD_FALL_THROUGH => TRUE, -- Sets the FIFO FWFT to &VALUES
+            INIT => X"000000000000000000", -- Initial values on output port
+            SIM_DEVICE => "7SERIES", -- Must be set to "7SERIES" for simulation behavior
+            SRVAL => X"000000000000000000" -- Set/Reset value for output port
+    )
+    port map (
+            -- ECC Signals: 1-bit (each) output: Error Correction Circuitry ports
+            DBITERR => 'open', -- 1-bit output: Double bit error status
+            ECCPARITY => 'open', -- 8-bit output: Generated error correction parity
+            SBITERR => 'open', -- 1-bit output: Single bit error status
+            -- Read Data: 18-bit (each) output: Read output data
+            DO => DIO_F8, -- 16-bit output: Data output
+            DOP => DIOP_F8, -- 2-bit output: Parity data output
+            -- Status: 1-bit (each) output: Flags and other FIFO status outputs
+            ALMOSTEMPTY => 'open', -- 1-bit output: Almost empty flag
+            ALMOSTFULL => 'open', -- 1-bit output: Almost full flag
+            EMPTY => EMPTY_H, -- 1-bit output: Empty flag
+            FULL => FULL_H, -- 1-bit output: Full flag
+            RDCOUNT => 'open', -- 13-bit output: Read count
+            RDERR => 'open', -- 1-bit output: Read error
+            WRCOUNT => 'open', -- 13-bit output: Write count
+            WRERR => 'open', -- 1-bit output: Write error
+            -- ECC Signals: 1-bit (each) input: Error Correction Circuitry ports
+            INJECTDBITERR => 'open', -- 1-bit input: Inject a double bit error input
+            INJECTSBITERR => 'open',
+            -- Read Control Signals: 1-bit (each) input: Read clock, enable and reset input signals
+            RDCLK => IntClk, -- 1-bit input: Read clock
+            RDEN => WREN_I, -- 1-bit input: Read enable
+            REGCE => '1', -- 1-bit input: Clock enable
+            RST => Reset, -- 1-bit input: Reset
+            RSTREG => '0', -- 1-bit input: Output register set/reset
+            -- Write Control Signals: 1-bit (each) input: Write clock and enable input signals
+            WRCLK => IntClk, -- 1-bit input: Rising edge write clock.
+            WREN => WREN_H, -- 1-bit input: Write enable
+            -- Write Data: 18-bit (each) input: Write input data
+            DI => DIO_F7, -- 16-bit input: Data input
+            DIP => DIOP_F7 -- 2-bit input: Parity input
+    );
+
+    FIFO36E1_instI : FIFO36E1
+    generic map (
+            ALMOST_EMPTY_OFFSET => X"00A0", -- Sets the almost empty threshold
+            ALMOST_FULL_OFFSET => X"00A0", -- Sets almost full threshold
+            DATA_WIDTH => 18, -- Sets data width to 4-72
+            DO_REG => 1, -- Enable output register (1-0) Must be 1 if EN_SYN = FALSE
+            EN_ECC_READ => FALSE, -- Enable ECC decoder, FALSE, TRUE
+            EN_ECC_WRITE => FALSE, -- Enable ECC encoder, FALSE, TRUE
+            EN_SYN => FALSE, -- Specifies FIFO as Asynchronous (FALSE) or Synchronous (TRUE)
+            FIFO_MODE => "FIFO36", -- Sets mode to "FIFO36" or "FIFO36_72"
+            FIRST_WORD_FALL_THROUGH => TRUE, -- Sets the FIFO FWFT to &VALUES
+            INIT => X"000000000000000000", -- Initial values on output port
+            SIM_DEVICE => "7SERIES", -- Must be set to "7SERIES" for simulation behavior
+            SRVAL => X"000000000000000000" -- Set/Reset value for output port
+    )
+    port map (
+            -- ECC Signals: 1-bit (each) output: Error Correction Circuitry ports
+            DBITERR => 'open', -- 1-bit output: Double bit error status
+            ECCPARITY => 'open', -- 8-bit output: Generated error correction parity
+            SBITERR => 'open', -- 1-bit output: Single bit error status
+            -- Read Data: 18-bit (each) output: Read output data
+            DO => DIO_F9, -- 16-bit output: Data output
+            DOP => DIOP_F9, -- 2-bit output: Parity data output
+            -- Status: 1-bit (each) output: Flags and other FIFO status outputs
+            ALMOSTEMPTY => 'open', -- 1-bit output: Almost empty flag
+            ALMOSTFULL => 'open', -- 1-bit output: Almost full flag
+            EMPTY => EMPTY_I, -- 1-bit output: Empty flag
+            FULL => FULL_I, -- 1-bit output: Full flag
+            RDCOUNT => 'open', -- 13-bit output: Read count
+            RDERR => 'open', -- 1-bit output: Read error
+            WRCOUNT => 'open', -- 13-bit output: Write count
+            WRERR => 'open', -- 1-bit output: Write error
+            -- ECC Signals: 1-bit (each) input: Error Correction Circuitry ports
+            INJECTDBITERR => 'open', -- 1-bit input: Inject a double bit error input
+            INJECTSBITERR => 'open',
+            -- Read Control Signals: 1-bit (each) input: Read clock, enable and reset input signals
+            RDCLK => IntClk, -- 1-bit input: Read clock
+            RDEN => WREN_J, -- 1-bit input: Read enable
+            REGCE => '1', -- 1-bit input: Clock enable
+            RST => Reset, -- 1-bit input: Reset
+            RSTREG => '0', -- 1-bit input: Output register set/reset
+            -- Write Control Signals: 1-bit (each) input: Write clock and enable input signals
+            WRCLK => IntClk, -- 1-bit input: Rising edge write clock.
+            WREN => WREN_I, -- 1-bit input: Write enable
+            -- Write Data: 18-bit (each) input: Write input data
+            DI => DIO_F8, -- 16-bit input: Data input
+            DIP => DIOP_F8 -- 2-bit input: Parity input
+    );
+    FIFO36E1_instJ : FIFO36E1
+    generic map (
+            ALMOST_EMPTY_OFFSET => X"00A0", -- Sets the almost empty threshold
+            ALMOST_FULL_OFFSET => X"00A0", -- Sets almost full threshold
+            DATA_WIDTH => 18, -- Sets data width to 4-72
+            DO_REG => 1, -- Enable output register (1-0) Must be 1 if EN_SYN = FALSE
+            EN_ECC_READ => FALSE, -- Enable ECC decoder, FALSE, TRUE
+            EN_ECC_WRITE => FALSE, -- Enable ECC encoder, FALSE, TRUE
+            EN_SYN => FALSE, -- Specifies FIFO as Asynchronous (FALSE) or Synchronous (TRUE)
+            FIFO_MODE => "FIFO36", -- Sets mode to "FIFO36" or "FIFO36_72"
+            FIRST_WORD_FALL_THROUGH => FALSE, -- Sets the FIFO FWFT to &VALUES
+            INIT => X"000000000000000000", -- Initial values on output port
+            SIM_DEVICE => "7SERIES", -- Must be set to "7SERIES" for simulation behavior
+            SRVAL => X"000000000000000000" -- Set/Reset value for output port
+    )
+    port map (
+            -- ECC Signals: 1-bit (each) output: Error Correction Circuitry ports
+            DBITERR => 'open', -- 1-bit output: Double bit error status
+            ECCPARITY => 'open', -- 8-bit output: Generated error correction parity
+            SBITERR => 'open', -- 1-bit output: Single bit error status
+            -- Read Data: 18-bit (each) output: Read output data
+            DO => DO, -- 16-bit output: Data output
+            DOP => DOP, -- 2-bit output: Parity data output
+            -- Status: 1-bit (each) output: Flags and other FIFO status outputs
+            ALMOSTEMPTY => ALMOSTEMPTY, -- 1-bit output: Almost empty flag
+            ALMOSTFULL => 'open', -- 1-bit output: Almost full flag
+            EMPTY => EMPTY, -- 1-bit output: Empty flag
+            FULL => FULL_J, -- 1-bit output: Full flag
+            RDCOUNT => R_Count, -- 13-bit output: Read count
+            RDERR => R_Error, -- 1-bit output: Read error
+            WRCOUNT => 'open', -- 13-bit output: Write count
+            WRERR => 'open', -- 1-bit output: Write error
+            -- ECC Signals: 1-bit (each) input: Error Correction Circuitry ports
+            INJECTDBITERR => 'open', -- 1-bit input: Inject a double bit error input
+            INJECTSBITERR => 'open',
+            -- Read Control Signals: 1-bit (each) input: Read clock, enable and reset input signals
+            RDCLK => RDClk, -- 1-bit input: Read clock
+            RDEN => RDEN, -- 1-bit input: Read enable
+            REGCE => '1', -- 1-bit input: Clock enable
+            RST => Reset, -- 1-bit input: Reset
+            RSTREG => '0', -- 1-bit input: Output register set/reset
+            -- Write Control Signals: 1-bit (each) input: Write clock and enable input signals
+            WRCLK => IntClk, -- 1-bit input: Rising edge write clock.
+            WREN => WREN_J, -- 1-bit input: Write enable
+            -- Write Data: 18-bit (each) input: Write input data
+            DI => DIO_F9, -- 16-bit input: Data input
+            DIP => DIOP_F9 -- 2-bit input: Parity input
+    );
+end Behavioral;
