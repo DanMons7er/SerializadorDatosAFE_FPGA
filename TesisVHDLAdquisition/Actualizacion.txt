@@ -1,5 +1,0 @@
-Version Anterior: V2
-
-Cambios respecto a la version anterior:
--Se sintetiza todo
-- Version entregada al final de TG1
